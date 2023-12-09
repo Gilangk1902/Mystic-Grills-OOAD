@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class MenuItemController {
@@ -45,6 +46,78 @@ public class MenuItemController {
 				MenuItem.AddNew(new_menuitem);
 				LoadData();
 			}
+			
+		});
+		
+		add_menuitem_view.getUpdate_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				int id = Integer.parseInt(
+						add_menuitem_view.getId_field().getText().toString()
+					);
+				if(Validator.ValidateName(String.valueOf(id)) != Validator.VALID){
+		            ShowInfoAlert("invalid id", "invalid id", "error");
+		            return;
+		        } 
+				int price = Integer.parseInt(
+						add_menuitem_view.getPrice_field().getText().toString()
+					);
+				if(Validator.ValidateName(String.valueOf(price)) != Validator.VALID){
+		            ShowInfoAlert("invalid price", "invalid name", "error");
+		            return;
+		        }
+				String name = add_menuitem_view.getName_field().getText().toString();
+				if(Validator.ValidateName(name) != Validator.VALID){
+		            ShowInfoAlert("invalid name", "invalid name", "error");
+		            return;
+		        }
+				String description = add_menuitem_view.getDescription_field().getText().toString();
+				if(Validator.ValidateName(description) != Validator.VALID){
+		            ShowInfoAlert("invalid desc", "invalid desc", "error");
+		            return;
+		        }
+				
+				MenuItem new_menuitem = new MenuItem(id, name, description, price);
+				MenuItem.Update(new_menuitem);
+				LoadData();
+			}
+			
+		});
+		
+		add_menuitem_view.getDelete_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				int id = Integer.parseInt(
+						add_menuitem_view.getId_field().getText().toString()
+					);
+				if(Validator.ValidateName(String.valueOf(id)) != Validator.VALID){
+		            ShowInfoAlert("invalid id", "invalid id", "error");
+		            return;
+		        } 
+				
+				MenuItem.Delete(id);
+				LoadData();
+			}
+			
+		});
+		
+		add_menuitem_view.getTable_view().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getClickCount() == 1) {
+                    MenuItem selected_menuitem = add_menuitem_view.getTable_view().getSelectionModel().getSelectedItem();
+                    if (selected_menuitem != null) {
+                        add_menuitem_view.getId_field().setText(String.valueOf(selected_menuitem.getId()));
+                        add_menuitem_view.getName_field().setText(selected_menuitem.getName());
+                        add_menuitem_view.getPrice_field().setText(String.valueOf(selected_menuitem.getPrice()));
+                        add_menuitem_view.getDescription_field().setText(selected_menuitem.getDescription());
+                    }
+                }
+			}
+			
 			
 		});
 	}

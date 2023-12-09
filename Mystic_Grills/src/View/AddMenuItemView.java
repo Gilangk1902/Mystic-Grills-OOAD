@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 public class AddMenuItemView {
 	private TableView<MenuItem> table_view;
 	private TextField name_field, id_field, description_field, price_field;
-	private Button add_button;
+	private Button add_button, update_button, delete_button;
 	private GridPane form;
 	private VBox vbox;
 	
@@ -53,6 +53,8 @@ public class AddMenuItemView {
 		description_field = new TextField();
 		price_field = new TextField();
 		add_button = new Button("Add");
+		update_button = new Button("Update");
+		delete_button = new Button("Delete");
 	
 		form = new GridPane();
         form.setHgap(10);
@@ -70,6 +72,8 @@ public class AddMenuItemView {
         
         
         form.add(add_button, 0, 4, 2, 1);
+        form.add(update_button, 2, 4, 2, 1);
+        form.add(delete_button, 4, 4, 2, 1);
 	}
 	
 	public Scene getScene() {
@@ -130,6 +134,30 @@ public class AddMenuItemView {
 
 	public void setForm(GridPane form) {
 		this.form = form;
+	}
+
+	public Button getUpdate_button() {
+		return update_button;
+	}
+
+	public void setUpdate_button(Button update_button) {
+		this.update_button = update_button;
+	}
+
+	public Button getDelete_button() {
+		return delete_button;
+	}
+
+	public void setDelete_button(Button delete_button) {
+		this.delete_button = delete_button;
+	}
+
+	public VBox getVbox() {
+		return vbox;
+	}
+
+	public void setVbox(VBox vbox) {
+		this.vbox = vbox;
 	}
 	
 	

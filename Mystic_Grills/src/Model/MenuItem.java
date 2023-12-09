@@ -45,6 +45,63 @@ public class MenuItem {
 		}
 	}
 	
+	public static void Update(MenuItem updated_menuItem) {
+	    DBConnector db_connector = DBConnector.getInstance();
+	    String query = "UPDATE menuitems SET name = ?, description = ?, price = ? WHERE id = ?";
+	    PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+
+	    try {
+	        prepared_statement.setString(1, updated_menuItem.getName());
+	        prepared_statement.setString(2, updated_menuItem.getDescription());
+	        prepared_statement.setInt(3, updated_menuItem.getPrice());
+	        prepared_statement.setInt(4, updated_menuItem.getId());
+
+	        prepared_statement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static void Delete(int menuItemId) {
+	    DBConnector db_connector = DBConnector.getInstance();
+	    String query = "DELETE FROM menuitems WHERE id = ?";
+	    PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+
+	    try {
+	        prepared_statement.setInt(1, menuItemId);
+
+	        prepared_statement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static MenuItem getById(int id) {
+		DBConnector db_connector = DBConnector.getInstance();
+		String query = "SELECT * FROM menuitems WHERE id = ?";
+		PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+		
+		MenuItem menu_item = null;
+		ResultSet result_set;
+		try {
+			prepared_statement.setInt(1, id);
+			result_set = prepared_statement.executeQuery();
+			if(result_set.next()) {
+				int price = result_set.getInt("price");
+				String name = result_set.getString("name");
+				String description = result_set.getString("description");
+				
+				menu_item = new MenuItem(id, name, description, price);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return menu_item;
+	}
+	
 	public static ArrayList<MenuItem> getAll(){
 		DBConnector db_connector = DBConnector.getInstance();
 		String query = "SELECT * FROM menuitems";
