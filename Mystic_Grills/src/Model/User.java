@@ -11,6 +11,10 @@ import Main.Session;
 public class User {
     private int id;
     private String role, username, email, password;
+    public class ROLE{
+    	public static final String CUSTOMER = "Customer";
+    	public static final String ADMIN = "Admin";
+    }
     
     public User() {
     	
@@ -18,7 +22,7 @@ public class User {
     
     public User(String _username, String _email, String _password){
         id = GenerateId();
-        role = "Customer";
+        role = ROLE.CUSTOMER;
         username = _username;
         email = _email;
         password = _password;
@@ -80,6 +84,7 @@ public class User {
 			e.printStackTrace();
 		}
     }
+    
 
     private int GenerateId(){
         Random random = new Random();

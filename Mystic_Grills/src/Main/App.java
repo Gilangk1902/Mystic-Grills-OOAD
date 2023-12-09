@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Mystic Grills");
         
         LoginView login_view = new LoginView();
         LoginController login_controller = new LoginController(login_view, primaryStage);

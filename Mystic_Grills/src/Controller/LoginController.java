@@ -2,6 +2,7 @@ package Controller;
 
 import Main.Session;
 import Model.User;
+import View.AddMenuItemView;
 import View.LoginView;
 import View.MainView;
 import View.RegisterView;
@@ -36,18 +37,24 @@ public class LoginController {
         login_view.getLogin_button().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				Login();
 				
-				MainView main_view = new MainView();
-				MainController main_controller = new MainController();
-				
 				if(Session.getUser().getUsername()!=null) {
-					Scene main_scene = main_view.getScene();
-					primary_stage.setScene(main_scene);
-				}
-				else {
+					String current_user_role =  Session.getUser().getRole().toLowerCase();
 					
+					if(current_user_role.equals(User.ROLE.ADMIN.toLowerCase())) {
+						AddMenuItemView add_menuitem_view = new AddMenuItemView();
+						MenuItemController add_menuitem_controller = new MenuItemController(
+									add_menuitem_view, primary_stage
+								);
+						
+						Scene add_menuitem_scene = add_menuitem_view.getScene();
+						primary_stage.setScene(add_menuitem_scene);
+					}
+					
+					else if(current_user_role.equals(User.ROLE.CUSTOMER.toLowerCase())) {
+						//TODO CUSTOMER PAGE
+					}
 				}
 			}
         });
