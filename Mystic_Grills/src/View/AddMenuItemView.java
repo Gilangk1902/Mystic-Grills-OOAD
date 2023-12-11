@@ -20,7 +20,9 @@ public class AddMenuItemView {
 	private VBox vbox;
 	
 	public AddMenuItemView() {
-		InitTableView();
+		//InitTableView();
+		table_view = new MenuItemTable().getTableView();
+		
 		InitForm();
 		
 		vbox = new VBox();
@@ -30,21 +32,6 @@ public class AddMenuItemView {
         vbox.getChildren().addAll(table_view, form);
 	}
 	
-	private void InitTableView() {
-		table_view = new TableView<>();
-		
-		TableColumn<MenuItem, Integer> id_column = new TableColumn<>("ID");
-		id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
-		TableColumn<MenuItem, String> name_column = new TableColumn<>("Name");
-		name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
-		TableColumn<MenuItem, String> description_column = new TableColumn<>("Description");
-		description_column.setCellValueFactory(new PropertyValueFactory<>("description"));
-		TableColumn<MenuItem, Integer> price_column = new TableColumn<>("Price");
-		price_column.setCellValueFactory(new PropertyValueFactory<>("price"));
-	
-		table_view.getColumns().addAll(id_column, name_column, description_column, price_column);
-			
-	}
 	
 	private void InitForm() {
 		name_field = new TextField();
@@ -60,9 +47,8 @@ public class AddMenuItemView {
         form.setHgap(10);
         form.setVgap(10);
         form.setPadding(new Insets(10, 10, 10, 10));
-
-//        form.add(new Label("ID:"), 0, 0);
-//        form.add(id_field, 1, 0);
+        
+        
         form.add(new Label("Name:"), 0, 1);
         form.add(name_field, 1, 1);
         form.add(new Label("Description:"), 0, 2);

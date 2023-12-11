@@ -5,6 +5,7 @@ import Model.User;
 import View.AddMenuItemView;
 import View.LoginView;
 import View.MainView;
+import View.OrderMenuItemView;
 import View.RegisterView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,7 +45,7 @@ public class LoginController {
 					
 					if(current_user_role.equals(User.ROLE.ADMIN.toLowerCase())) {
 						AddMenuItemView add_menuitem_view = new AddMenuItemView();
-						MenuItemController add_menuitem_controller = new MenuItemController(
+						AddMenuItemController add_menuitem_controller = new AddMenuItemController(
 									add_menuitem_view, primary_stage
 								);
 						
@@ -53,7 +54,12 @@ public class LoginController {
 					}
 					
 					else if(current_user_role.equals(User.ROLE.CUSTOMER.toLowerCase())) {
-						//TODO CUSTOMER PAGE
+						OrderMenuItemView order_menuitem_view = new OrderMenuItemView();
+						OrderMenuItemController order_menuitem_controller = 
+												new OrderMenuItemController(order_menuitem_view, primary_stage);
+						
+						Scene order_menuitem_scene = order_menuitem_view.getScene();
+						primary_stage.setScene(order_menuitem_scene);
 					}
 				}
 			}

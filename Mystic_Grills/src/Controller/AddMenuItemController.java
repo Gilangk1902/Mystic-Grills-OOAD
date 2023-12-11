@@ -12,11 +12,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class MenuItemController {
+public class AddMenuItemController {
 	private AddMenuItemView add_menuitem_view;
 	private Stage primary_stage;
 	
-	public MenuItemController(AddMenuItemView _add_menuitem_view, Stage _primary_stage) {
+	public AddMenuItemController(AddMenuItemView _add_menuitem_view, Stage _primary_stage) {
 		add_menuitem_view = _add_menuitem_view;
 		primary_stage = _primary_stage;
 		LoadData();
