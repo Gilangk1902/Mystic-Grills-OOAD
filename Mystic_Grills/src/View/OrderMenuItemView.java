@@ -19,7 +19,7 @@ public class OrderMenuItemView {
 	private VBox vbox;
 	
 	public OrderMenuItemView() {
-		//InitTableView();
+		Label title = new Label("lets get shopping");
 		table_view = new MenuItemTable().getTableView();
 		InitForm();
 		
@@ -27,7 +27,7 @@ public class OrderMenuItemView {
 		vbox.setSpacing(10);
 		vbox.setPadding(new Insets(10));
         
-        vbox.getChildren().addAll(table_view, form);
+        vbox.getChildren().addAll(title, table_view, form);
 	}
 	
 	

@@ -7,6 +7,12 @@ import java.sql.SQLException;
 public class OrderItem {
 	int id, menuitem_id, quantity;
 	
+	public OrderItem(int _id, int _menuitem_id, int _quantity) {
+		id = _id;
+		menuitem_id = _menuitem_id;
+		quantity = _quantity;
+	}
+	
 	public OrderItem(int _menuitem_id, int _quantity) {
 		id = IDGeneratorUtil.GenerateId();
 		menuitem_id = _menuitem_id;
@@ -27,7 +33,7 @@ public class OrderItem {
 				int _menuitem_id = result_set.getInt("menu_item_id");
 				int _quantity = result_set.getInt("quantity");
 				
-				_order_item = new OrderItem(_menuitem_id, _quantity);
+				_order_item = new OrderItem(id ,_menuitem_id, _quantity);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,6 +53,35 @@ public class OrderItem {
 			prepared_statement.setInt(1, order_item.getId());
 			prepared_statement.setInt(2, order_item.getMenuitem_Id());
 	        prepared_statement.setInt(3, order_item.getQuantity());
+	        prepared_statement.executeUpdate();
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void Delete(int id) {
+		DBConnector db_connector = DBConnector.getInstance();
+    	String query = "DELETE FROM orderitems WHERE id = ?";
+    	
+    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+    	try {
+			prepared_statement.setInt(1, id);
+	        prepared_statement.executeUpdate();
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void UpdateQuantity(int id, int quantity) {
+		DBConnector db_connector = DBConnector.getInstance();
+    	String query = "UPDATE orderitems SET quantity = ? WHERE id = ?";
+    	
+    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+    	try {
+			prepared_statement.setInt(1, quantity);
+			prepared_statement.setInt(2, id);
 	        prepared_statement.executeUpdate();
     	} catch (SQLException e) {
 			// TODO Auto-generated catch block

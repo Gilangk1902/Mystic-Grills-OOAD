@@ -49,6 +49,20 @@ public class Order {
     	return order_items;
 	}
 	
+	public static void Delete(int order_item_id) {
+		DBConnector db_connector = DBConnector.getInstance();
+    	String query = "DELETE FROM orders WHERE order_item_id = ?";
+    	
+    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+    	try {
+			prepared_statement.setInt(1, order_item_id);
+	        prepared_statement.executeUpdate();
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void InsertOrder(Order order) {
 		DBConnector db_connector = DBConnector.getInstance();
     	String query = "INSERT INTO orders "

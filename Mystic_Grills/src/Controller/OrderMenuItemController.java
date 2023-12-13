@@ -1,10 +1,12 @@
 package Controller;
 
+import View.CartView;
 import View.OrderMenuItemView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -84,6 +86,12 @@ public class OrderMenuItemController {
 					
 					Order order = new Order(Session.getUser().getId(), order_item.getId());
 					Order.InsertOrder(order);
+					
+					CartView cart_view = new CartView();
+					CartController cart_controller = new CartController(cart_view, primary_stage);
+					
+					Scene scene = cart_view.getScene();
+					primary_stage.setScene(scene);
 				}
 			}});
 	}
