@@ -15,7 +15,7 @@ public class OrderItem {
 	
 	public static OrderItem getOrderById(int id) {
 		DBConnector db_connector = DBConnector.getInstance();
-    	String query = "SELECT * FROM orderitems WHERE name = ?";
+    	String query = "SELECT * FROM orderitems WHERE id = ?";
     	OrderItem _order_item = null;
     	
     	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
@@ -38,7 +38,7 @@ public class OrderItem {
     	return _order_item;
 	}
 	
-	public static void Order(OrderItem order_item) {
+	public static void InsertOrderItem(OrderItem order_item) {
 		DBConnector db_connector = DBConnector.getInstance();
     	String query = "INSERT INTO orderitems (id, menu_item_id, quantity) VALUES (?, ?, ?)";
     	

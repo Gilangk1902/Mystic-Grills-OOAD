@@ -1,4 +1,4 @@
-package View;
+package View.TableView;
 
 import Model.MenuItem;
 import javafx.scene.control.TableColumn;

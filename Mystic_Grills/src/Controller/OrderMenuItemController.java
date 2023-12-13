@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+import Main.Session;
 import Model.*;
 
 public class OrderMenuItemController {
@@ -79,7 +80,10 @@ public class OrderMenuItemController {
 												Integer.parseInt(id_menuitem), 
 												Integer.parseInt(quantity_in_string)
 											);
-					OrderItem.Order(order_item);
+					OrderItem.InsertOrderItem(order_item);
+					
+					Order order = new Order(Session.getUser().getId(), order_item.getId());
+					Order.InsertOrder(order);
 				}
 			}});
 	}
