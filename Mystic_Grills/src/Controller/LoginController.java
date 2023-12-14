@@ -2,7 +2,7 @@ package Controller;
 
 import Main.Session;
 import Model.User;
-import View.AddMenuItemView;
+import View.ManageMenuItemView;
 import View.LoginView;
 import View.MainView;
 import View.OrderMenuItemView;
@@ -40,17 +40,15 @@ public class LoginController {
 			public void handle(ActionEvent arg0) {
 				Login();
 				
-				if(Session.getUser().getUsername()!=null) {
+				if(Session.getUser().getName()!=null) {
 					String current_user_role =  Session.getUser().getRole().toLowerCase();
 					
 					if(current_user_role.equals(User.ROLE.ADMIN.toLowerCase())) {
-						AddMenuItemView add_menuitem_view = new AddMenuItemView();
-						AddMenuItemController add_menuitem_controller = new AddMenuItemController(
-									add_menuitem_view, primary_stage
-								);
+						MainView main_view = new MainView();
+						MainController main_controller = new MainController(main_view, primary_stage);
 						
-						Scene add_menuitem_scene = add_menuitem_view.getScene();
-						primary_stage.setScene(add_menuitem_scene);
+						Scene order_menuitem_scene = main_view.getScene();
+						primary_stage.setScene(order_menuitem_scene);
 					}
 					
 					else if(current_user_role.equals(User.ROLE.CUSTOMER.toLowerCase())) {

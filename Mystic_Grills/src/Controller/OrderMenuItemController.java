@@ -1,6 +1,7 @@
 package Controller;
 
 import View.CartView;
+import View.MainView;
 import View.OrderMenuItemView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +31,7 @@ public class OrderMenuItemController {
 	
 	private void Listeners() {
 		TableViewListener();
-		OrderButtonListener();
+		ButtonListener();
 		EditQuantityListeners();
 	}
 	
@@ -67,8 +68,9 @@ public class OrderMenuItemController {
 			}});
 	}
 	
-	private void OrderButtonListener() {
-		order_menuitem_view.getOrder_button().setOnAction(new EventHandler<ActionEvent>() {
+	private void ButtonListener() {
+		order_menuitem_view
+		.getOrder_button().setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -94,6 +96,19 @@ public class OrderMenuItemController {
 					primary_stage.setScene(scene);
 				}
 			}});
+		
+		order_menuitem_view
+		.getBack_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				MainView main_view = new MainView();
+				MainController main_controller = new MainController(main_view, primary_stage);
+				
+				Scene scene = main_view.getScene();
+				primary_stage.setScene(scene);
+			}
+		});
 	}
 	
 	private void TableViewListener() {
