@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 public class MainView {
 	private Label username_label, role_label;
 	private Button menuitem_button, cart_button;
-	private Button manage_user_button;
+	private Button manage_user_button, logout_button;
 	private StackPane root;
 	
 	public MainView() {
@@ -19,10 +19,16 @@ public class MainView {
         root = new StackPane();
         VBox vBox = null;
         if(Session.getUser().getRole().toString().equals(User.ROLE.CUSTOMER)) {
-        	 vBox = new VBox(username_label, role_label, menuitem_button, cart_button);
+        	 vBox = new VBox(
+        			 	username_label, role_label, menuitem_button, 
+        			 	cart_button, logout_button
+        			 );
         }
         else if(Session.getUser().getRole().toString().equals(User.ROLE.ADMIN)) {
-        	vBox = new VBox(username_label, role_label, manage_user_button, menuitem_button);
+        	vBox = new VBox(
+        				username_label, role_label, manage_user_button, 
+        				menuitem_button, logout_button
+        			);
         }
         root.getChildren().add(vBox);
     }
@@ -43,6 +49,7 @@ public class MainView {
         	manage_user_button = new Button("Manage User");
         	menuitem_button = new Button("Manage Menu");
         }
+        logout_button = new Button("logout");
     }
 
 	public Label getLabel() {
@@ -99,6 +106,14 @@ public class MainView {
 
 	public void setManage_user_button(Button manage_user_button) {
 		this.manage_user_button = manage_user_button;
+	}
+
+	public Button getLogout_button() {
+		return logout_button;
+	}
+
+	public void setLogout_button(Button logout_button) {
+		this.logout_button = logout_button;
 	}
 
 	

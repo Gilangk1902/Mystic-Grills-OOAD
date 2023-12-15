@@ -12,11 +12,10 @@ public class Session {
 	}
 	
 	public static void setUser(User _user) {
-//		user.setId(_user.getId());
-//		user.setRole(_user.getRole());
-//		user.setEmail(_user.getEmail());
-//		user.setUsername(_user.getUsername());
-//		user.setPassword(_user.getPassword());
 		user = _user;
+	}
+	
+	public static void logout() {
+		user = null;
 	}
 }

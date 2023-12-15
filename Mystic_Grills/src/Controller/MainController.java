@@ -3,6 +3,7 @@ package Controller;
 import Main.Session;
 import Model.User;
 import View.CartView;
+import View.LoginView;
 import View.MainView;
 import View.ManageMenuItemView;
 import View.ManageUserView;
@@ -30,6 +31,21 @@ public class MainController {
 		else if(user_role.equals(User.ROLE.ADMIN)) {
 			AdminListener();
 		}
+		
+		main_view
+		.getLogout_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				Session.logout();
+				LoginView login_view = new LoginView();
+				LoginController login_controller = new LoginController(login_view, primary_stage);
+				
+				Scene scene = login_view.getScene();
+				primary_stage.setScene(scene);
+			}
+			
+		});
 	}
 	
 	private void AdminListener() {
