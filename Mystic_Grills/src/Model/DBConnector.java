@@ -12,7 +12,7 @@ public class DBConnector {
     private static final String USER = "root";
     private static final String PASSWORD = "";
     private static final String HOST = "localhost:3306";
-    private static final String DATABASE = "mystic-grills";
+    private static final String DATABASE = "mystic_grills";
     private static final String CONNECTION = String.format("jdbc:mysql://%s/%s", HOST, DATABASE);
     
     private static Connection connection;

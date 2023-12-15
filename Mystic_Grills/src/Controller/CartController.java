@@ -31,6 +31,7 @@ public class CartController {
 		TableViewListener();
 		DeleteListener();
 		BackListener();
+		CheckoutListener();
 	}
 	
 	private void BackListener() {
@@ -47,6 +48,10 @@ public class CartController {
 			}
 			
 		});
+	}
+	
+	private void CheckoutListener() {
+		
 	}
 	
 	private void DeleteListener() {

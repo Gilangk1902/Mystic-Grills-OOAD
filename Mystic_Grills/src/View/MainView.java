@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 
 public class MainView {
 	private Label username_label, role_label;
-	private Button menuitem_button, cart_button;
+	private Button menuitem_button, cart_button, manage_order_button ;
 	private Button manage_user_button;
 	private StackPane root;
 	
@@ -23,6 +23,9 @@ public class MainView {
         }
         else if(Session.getUser().getRole().toString().equals(User.ROLE.ADMIN)) {
         	vBox = new VBox(username_label, role_label, manage_user_button, menuitem_button);
+        }
+        else if(Session.getUser().getRole().toString().equals(User.ROLE.CHEF)) {
+        	vBox = new VBox(username_label, role_label, manage_order_button);
         }
         root.getChildren().add(vBox);
     }
@@ -42,6 +45,9 @@ public class MainView {
         else if(Session.getUser().getRole().toString().equals(User.ROLE.ADMIN)) {
         	manage_user_button = new Button("Manage User");
         	menuitem_button = new Button("Manage Menu");
+        }
+        else if(Session.getUser().getRole().toString().equals(User.ROLE.CHEF)) {
+        	manage_order_button = new Button("Manage Order");
         }
     }
 

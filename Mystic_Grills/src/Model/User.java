@@ -15,6 +15,7 @@ public class User {
     public class ROLE{
     	public static final String CUSTOMER = "Customer";
     	public static final String ADMIN = "Admin";
+    	public static final String CHEF = "Chef";
     }
     
     public User() {

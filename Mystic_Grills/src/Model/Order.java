@@ -49,6 +49,34 @@ public class Order {
     	return order_items;
 	}
 	
+	public static ArrayList<OrderItem> getOrderNameByid(int order_item_id) {
+		DBConnector db_connector = DBConnector.getInstance();
+    	String query = "SELECT orders.id, menuitems.name "
+    			+ "FROM orders "
+    			+ "JOIN orderitems ON orders.order_item_id = orderitems.id "
+    			+ "JOIN menuitems ON orderitems.menu_item_id = menuitems.id;";
+		ArrayList<OrderItem> order_items = new ArrayList<>();
+		    	
+		    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+		    	try {
+					prepared_statement.setInt(1, order_item_id);
+					
+					ResultSet result_set = prepared_statement.executeQuery();
+					while(result_set.next()) {
+						int order_id = result_set.getInt("order_item_id");
+						OrderItem order_item = OrderItem.getOrderById(order_id);
+						order_items.add(order_item);
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					order_items = null;
+				}
+		    	
+		    	return order_items;
+    	
+	}
+	
 	public static void Delete(int order_item_id) {
 		DBConnector db_connector = DBConnector.getInstance();
     	String query = "DELETE FROM orders WHERE order_item_id = ?";

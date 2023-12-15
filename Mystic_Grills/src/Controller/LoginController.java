@@ -58,6 +58,13 @@ public class LoginController {
 						Scene order_menuitem_scene = main_view.getScene();
 						primary_stage.setScene(order_menuitem_scene);
 					}
+					else if(current_user_role.equals(User.ROLE.CHEF.toLowerCase())) {
+						MainView main_view = new MainView();
+						MainController main_controller = new MainController(main_view, primary_stage);
+						
+						Scene order_menuitem_scene = main_view.getScene();
+						primary_stage.setScene(order_menuitem_scene);
+					}
 				}
 			}
         });
