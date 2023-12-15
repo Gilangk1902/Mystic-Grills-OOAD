@@ -28,7 +28,7 @@ public class MainView {
     }
 
     public Scene getScene() {
-        return new Scene(root, 400, 400);
+        return new Scene(root, ViewProperties.WIDTH, ViewProperties.HEIGHT);
     }
 
     private void Init() {

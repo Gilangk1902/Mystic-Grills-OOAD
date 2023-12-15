@@ -3,11 +3,13 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.MenuItem;
+import View.MainView;
 import View.ManageMenuItemView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -21,6 +23,21 @@ public class ManageMenuItemController {
 		primary_stage = _primary_stage;
 		LoadData();
 		Listeners();
+		BackButtonListener();
+	}
+	
+	private void BackButtonListener() {
+		add_menuitem_view
+		.getBack_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				MainView main_view = new MainView();
+				MainController main_controller = new MainController(main_view, primary_stage);
+				
+				Scene scene = main_view.getScene();
+				primary_stage.setScene(scene);
+			}});
 	}
 	
 	public void Listeners() {
@@ -120,6 +137,8 @@ public class ManageMenuItemController {
 			
 			
 		});
+		
+		
 	}
 	
 	public void LoadData() {
