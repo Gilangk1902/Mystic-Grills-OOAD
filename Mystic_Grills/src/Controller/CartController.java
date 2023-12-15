@@ -6,10 +6,12 @@ import Main.Session;
 import Model.Order;
 import Model.OrderItem;
 import View.CartView;
+import View.MainView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -28,6 +30,23 @@ public class CartController {
 		EditQuantityListeners();
 		TableViewListener();
 		DeleteListener();
+		BackListener();
+	}
+	
+	private void BackListener() {
+		cart_view
+		.getBack_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				MainView main_view = new MainView();
+				MainController main_controller = new MainController(main_view, primary_stage);
+				
+				Scene scene = main_view.getScene();
+				primary_stage.setScene(scene);
+			}
+			
+		});
 	}
 	
 	private void DeleteListener() {

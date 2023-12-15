@@ -13,14 +13,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class AddMenuItemView {
+public class ManageMenuItemView {
 	private TableView<MenuItem> table_view;
 	private TextField name_field, id_field, description_field, price_field;
 	private Button add_button, update_button, delete_button;
 	private GridPane form;
 	private VBox vbox;
 	
-	public AddMenuItemView() {
+	public ManageMenuItemView() {
 		//InitTableView();
 		table_view = new MenuItemTable().getTableView();
 		

@@ -1,7 +1,11 @@
 package Controller;
 
+import Main.Session;
+import Model.User;
 import View.CartView;
 import View.MainView;
+import View.ManageMenuItemView;
+import View.ManageUserView;
 import View.OrderMenuItemView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +23,52 @@ public class MainController {
 	}
 	
 	private void Listeners() {
+		String user_role = Session.getUser().getRole().toString();
+		if(user_role.equals(User.ROLE.CUSTOMER)) {
+			CustomerListeners();
+		}
+		else if(user_role.equals(User.ROLE.ADMIN)) {
+			AdminListener();
+		}
+	}
+	
+	private void AdminListener() {
+		main_view
+		.getMenuitem_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				ManageMenuItemView manage_menuitem_view = new ManageMenuItemView();
+				ManageMenuItemController 
+				manage_menuitem_controller = new ManageMenuItemController(
+												manage_menuitem_view, primary_stage
+											);
+				
+				Scene scene = manage_menuitem_view.getScene();
+				primary_stage.setScene(scene);
+			}
+			
+		});
+		
+		main_view
+		.getManage_user_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				ManageUserView manage_user_view = new ManageUserView();
+				ManageUserController 
+				manage_user_controller = new ManageUserController(
+							manage_user_view, primary_stage
+						);
+				
+				Scene scene = manage_user_view.getScene();
+				primary_stage.setScene(scene);
+			}
+			
+		});
+	}
+	
+	private void CustomerListeners() {
 		main_view.getMenuitem_button().setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override

@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 public class OrderMenuItemView {
 	private TableView<MenuItem> table_view;
 	private TextField quantity_field, name_field, id_field;
-	private Button order_button, min_button, plus_button;
+	private Button order_button, min_button, plus_button, back_button;
 	private GridPane form;
 	private VBox vbox;
 	
@@ -39,6 +39,7 @@ public class OrderMenuItemView {
 		order_button = new Button("add to cart");
 		min_button = new Button("-");
 		plus_button = new Button("+");
+		back_button = new Button("back");
 		
 		form = new GridPane();
         form.setHgap(10);
@@ -52,6 +53,7 @@ public class OrderMenuItemView {
         form.add(min_button, 0, 3);
         form.add(plus_button, 1, 3);
         form.add(order_button, 0, 4);
+        form.add(back_button, 1, 4);
         
 	}
 	
@@ -151,6 +153,16 @@ public class OrderMenuItemView {
 
 	public void setPlus_button(Button plus_button) {
 		this.plus_button = plus_button;
+	}
+
+
+	public Button getBack_button() {
+		return back_button;
+	}
+
+
+	public void setBack_button(Button back_button) {
+		this.back_button = back_button;
 	}
 	
 	
