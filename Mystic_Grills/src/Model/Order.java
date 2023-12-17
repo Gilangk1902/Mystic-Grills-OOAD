@@ -27,7 +27,7 @@ public class Order {
 	}
 	
 	private int CalculateTotal() {
-		return 0;
+		return OrderItem.getOrderItemQuantity(order_item_id) * OrderItem.getOrderItemPrice(order_item_id);
 	}
 	
 	public static void OrderAll(int user_id) {

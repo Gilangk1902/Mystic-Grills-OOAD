@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 
 import Main.Session;
+import Model.MenuItem;
 import Model.Order;
 import Model.OrderItem;
 import View.CartView;
@@ -152,9 +153,18 @@ public class CartController {
 	}
 	
 	private void LoadData() {
-		ArrayList<Model.OrderItem> orders = Order.GetOrderItemByUserID(Session.getUser().getId());
-		ObservableList<Model.OrderItem> observable_menuitems = FXCollections.observableArrayList(orders);
-		cart_view.getTable_view().setItems(observable_menuitems);
+	    ArrayList<OrderItem> orders = Order.GetOrderItemByUserID(Session.getUser().getId());
+	    ObservableList<OrderItem> observableMenuItems = FXCollections.observableArrayList(orders);
+	    cart_view.getTable_view().setItems(observableMenuItems);
+
+	    int total = 0;
+
+	    for (OrderItem orderItem : cart_view.getTable_view().getItems()) {
+	    	int menu_item_id = orderItem.getMenuitem_id();
+	        total += orderItem.getQuantity() * MenuItem.getPrice(menu_item_id);
+	    }
+
+	    cart_view.getTotal_field().setText(String.valueOf(total));
 	}
 	
 //	private void Listeners() {

@@ -51,13 +51,21 @@ public class OrderItemTable {
 	    TableColumn<OrderItem, Integer> quantity_column = new TableColumn<>("Quantity");
 	    quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 	    
-//	    TableColumn<OrderItem, Integer> button_column = new TableColumn<>("Quantity");
-//	    button_column.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-//	    button_column.setCellFactory(column -> new QuantityButtonCell());
+	    TableColumn<OrderItem, Integer> total_column = new TableColumn<>("Total");
+	    total_column.setCellValueFactory(param -> {
+	        OrderItem orderItem = param.getValue();
+	        int quantity = orderItem.getQuantity();
+	        int menuItemId = orderItem.getMenuitem_id();
+	        int price = MenuItem.getPrice(menuItemId);
+
+	        int total = quantity * price;
+
+	        return new SimpleIntegerProperty(total).asObject();
+	    });
 
 	    table_view.getColumns().addAll(
 	    		id_column, menuitem_id_column, name_column, 
-	    		price_column, quantity_column);
+	    		price_column, quantity_column, total_column);
 	}
 	
 	public TableView<OrderItem> getTableView(){

@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 public class CartView {
 	private TableView<OrderItem> table_view;
 	private TextField quantity_field, user_id_field, id_field, order_item_id_field;
+	private Label total_field;
 	private Button delete_button, min_button, plus_button, back_button, order_button;
 	private GridPane form;
 	private VBox vbox;
@@ -35,6 +36,7 @@ public class CartView {
 		quantity_field = new TextField();
 		user_id_field = new TextField();
 		order_item_id_field = new TextField();
+		total_field = new Label();
 		id_field = new TextField();
 		id_field.setVisible(false);
 		delete_button = new Button("delete");
@@ -54,9 +56,12 @@ public class CartView {
         form.add(quantity_field, 1, 3);
         form.add(min_button, 0, 4);
         form.add(plus_button, 1, 4);
-        form.add(delete_button, 0, 5);
-        form.add(order_button, 0, 6);
-        form.add(back_button, 1, 6);
+        form.add(new Label("Total price : "), 0, 5);
+        form.add(total_field, 1, 5);
+        
+        form.add(delete_button, 0, 6);
+        form.add(order_button, 0, 7);
+        form.add(back_button, 1, 7);
         
 	}
 	
@@ -158,6 +163,14 @@ public class CartView {
 
 	public void setOrder_button(Button order_button) {
 		this.order_button = order_button;
+	}
+
+	public Label getTotal_field() {
+		return total_field;
+	}
+
+	public void setTotal_field(Label total_field) {
+		this.total_field = total_field;
 	}
 
 	
