@@ -12,41 +12,57 @@ public class Order {
 	private String status;
 	private Date date;
 	
+	class Status{
+		public static final String NOT_ORDERED = "not ordered";
+		public static final String PENDING  = "pending";
+	}
+	
 	public Order(int user_id, int order_item_id) {
 		this.id = IDGeneratorUtil.GenerateId();
 		this.user_id =  user_id;
 		this.order_item_id = order_item_id;
 		this.total = CalculateTotal();
 		this.date = new Date(System.currentTimeMillis());
-		this.status = "Pending";
+		this.status = Status.NOT_ORDERED;
 	}
 	
 	private int CalculateTotal() {
 		return 0;
 	}
 	
+	public static void OrderAll(int user_id) {
+	    DBConnector db_connector = DBConnector.getInstance();
+	    String query = "UPDATE orders SET status = '" + Order.Status.PENDING + "' WHERE user_id = ?";
+
+	    try (PreparedStatement prepared_statement = db_connector.PrepareStatement(query)) {
+	        prepared_statement.setInt(1, user_id);
+	        prepared_statement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 	public static ArrayList<OrderItem> GetOrderItemByUserID(int user_id) {
-		DBConnector db_connector = DBConnector.getInstance();
-    	String query = "SELECT * FROM orders WHERE user_id = ?";
-    	ArrayList<OrderItem> order_items = new ArrayList<>();
-    	
-    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
-    	try {
-			prepared_statement.setInt(1, user_id);
-			
-			ResultSet result_set = prepared_statement.executeQuery();
-			while(result_set.next()) {
-				int order_item_id = result_set.getInt("order_item_id");
-				OrderItem order_item = OrderItem.getOrderById(order_item_id);
-				order_items.add(order_item);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			order_items = null;
-		}
-    	
-    	return order_items;
+	    DBConnector db_connector = DBConnector.getInstance();
+	    String query = "SELECT * FROM orders WHERE user_id = ? AND status = ?";
+	    ArrayList<OrderItem> order_items = new ArrayList<>();
+
+	    try (PreparedStatement prepared_statement = db_connector.PrepareStatement(query)) {
+	        prepared_statement.setInt(1, user_id);
+	        prepared_statement.setString(2, Order.Status.NOT_ORDERED);
+
+	        ResultSet result_set = prepared_statement.executeQuery();
+	        while (result_set.next()) {
+	            int order_item_id = result_set.getInt("order_item_id");
+	            OrderItem order_item = OrderItem.getOrderById(order_item_id);
+	            order_items.add(order_item);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        order_items = null;
+	    }
+
+	    return order_items;
 	}
 	
 	public static void Delete(int order_item_id) {

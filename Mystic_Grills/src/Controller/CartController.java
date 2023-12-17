@@ -31,6 +31,20 @@ public class CartController {
 		TableViewListener();
 		DeleteListener();
 		BackListener();
+		OrderListener();
+	}
+	
+	private void OrderListener() {
+		cart_view
+		.getOrder_button().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				Order.OrderAll(Session.getUser().getId());
+				LoadData();
+			}
+			
+		});
 	}
 	
 	private void BackListener() {
