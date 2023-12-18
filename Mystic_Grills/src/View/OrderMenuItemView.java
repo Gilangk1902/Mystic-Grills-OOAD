@@ -58,7 +58,7 @@ public class OrderMenuItemView {
 	}
 	
 	public Scene getScene() {
-		return new Scene(vbox, 400, 400);
+		return new Scene(vbox, ViewProperties.WIDTH, ViewProperties.HEIGHT);
 	}
 	
 	public TableView<MenuItem> getTableView(){

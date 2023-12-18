@@ -19,10 +19,16 @@ public class MainView {
         root = new StackPane();
         VBox vBox = null;
         if(Session.getUser().getRole().toString().equals(User.ROLE.CUSTOMER)) {
-        	 vBox = new VBox(username_label, role_label, menuitem_button, cart_button);
+        	 vBox = new VBox(
+        			 	username_label, role_label, menuitem_button, 
+        			 	cart_button, logout_button
+        			 );
         }
         else if(Session.getUser().getRole().toString().equals(User.ROLE.ADMIN)) {
-        	vBox = new VBox(username_label, role_label, manage_user_button, menuitem_button);
+        	vBox = new VBox(
+        				username_label, role_label, manage_user_button, 
+        				menuitem_button, logout_button
+        			);
         }
         else if(Session.getUser().getRole().toString().equals(User.ROLE.CHEF)) {
         	vBox = new VBox(username_label, role_label, manage_order_button);
@@ -129,6 +135,14 @@ public class MainView {
 
 	public void setManage_user_button(Button manage_user_button) {
 		this.manage_user_button = manage_user_button;
+	}
+
+	public Button getLogout_button() {
+		return logout_button;
+	}
+
+	public void setLogout_button(Button logout_button) {
+		this.logout_button = logout_button;
 	}
 
 	

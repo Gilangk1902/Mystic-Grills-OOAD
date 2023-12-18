@@ -3,6 +3,7 @@ package Controller;
 import Main.Session;
 import Model.User;
 import View.CartView;
+import View.LoginView;
 import View.MainView;
 import View.ManageMenuItemView;
 import View.ManageOrderView;
@@ -37,7 +38,7 @@ public class MainController {
 	}
 	
 	private void ChefListener() {
-		main_view.getManage_order_button().setOnAction(new EventHandler<ActionEvent>() {
+		main_view.getManage_order_button().setOnAction(new EventHandler<ActionEvent>()) {
 			
 			@Override
 			public void handle(ActionEvent event) {

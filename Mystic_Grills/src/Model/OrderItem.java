@@ -19,6 +19,43 @@ public class OrderItem {
 		quantity = _quantity;
 	}
 	
+	public static int getOrderItemQuantity(int id) {
+		DBConnector db_connector = DBConnector.getInstance();
+	    String query = "SELECT quantity FROM orderitems WHERE id = ?";
+	    int quantity = 0;
+
+	    try (PreparedStatement prepared_statement = db_connector.PrepareStatement(query)) {
+	        prepared_statement.setInt(1, id);
+	        ResultSet result_set = prepared_statement.executeQuery();
+	        if (result_set.next()) {
+	            quantity = result_set.getInt("quantity");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return quantity;
+	}
+	
+	public static int getOrderItemPrice(int id) {
+		DBConnector db_connector = DBConnector.getInstance();
+	    String query = "SELECT menu_item_id FROM orderitems WHERE id = ?";
+	    int price = 0;
+
+	    try (PreparedStatement prepared_statement = db_connector.PrepareStatement(query)) {
+	        prepared_statement.setInt(1, id);
+	        ResultSet result_set = prepared_statement.executeQuery();
+	        if (result_set.next()) {
+	            int menuitem_id = result_set.getInt("menu_item_id");
+	            price = MenuItem.getPrice(menuitem_id);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return price;
+	}
+	
 	public static OrderItem getOrderById(int id) {
 		DBConnector db_connector = DBConnector.getInstance();
     	String query = "SELECT * FROM orderitems WHERE id = ?";

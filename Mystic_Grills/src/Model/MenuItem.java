@@ -28,6 +28,27 @@ public class MenuItem {
 		id = GenerateId();
 	}
 	
+	public static int getPrice(int id) {
+		DBConnector db_connector = DBConnector.getInstance();
+		String query = "SELECT * FROM menuitems WHERE id = ?";
+		PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+		int price = 0;
+		
+		ResultSet result_set;
+		try {
+			prepared_statement.setInt(1, id);
+			result_set = prepared_statement.executeQuery();
+			if(result_set.next()) {
+				price = result_set.getBigDecimal("price").intValue();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return price;
+	}
+	
 	public static void AddNew(MenuItem menuitem) {
 		DBConnector db_connector = DBConnector.getInstance();
     	String query = "INSERT INTO menuitems (id, name, description, price) VALUES (?, ?, ?, ?)";

@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 public class ManageMenuItemView {
 	private TableView<MenuItem> table_view;
 	private TextField name_field, id_field, description_field, price_field;
-	private Button add_button, update_button, delete_button;
+	private Button add_button, update_button, delete_button, back_button;
 	private GridPane form;
 	private VBox vbox;
 	
@@ -43,6 +43,7 @@ public class ManageMenuItemView {
 		add_button = new Button("Add");
 		update_button = new Button("Update");
 		delete_button = new Button("Delete");
+		back_button = new Button("back");
 	
 		form = new GridPane();
         form.setHgap(10);
@@ -61,10 +62,11 @@ public class ManageMenuItemView {
         form.add(add_button, 0, 4, 2, 1);
         form.add(update_button, 2, 4, 2, 1);
         form.add(delete_button, 4, 4, 2, 1);
+        form.add(back_button, 5, 5, 2, 1);
 	}
 	
 	public Scene getScene() {
-		return new Scene(vbox, 400, 400);
+		return new Scene(vbox, ViewProperties.WIDTH, ViewProperties.HEIGHT);
 	}
 
 	public TableView<MenuItem> getTable_view() {
@@ -145,6 +147,16 @@ public class ManageMenuItemView {
 
 	public void setVbox(VBox vbox) {
 		this.vbox = vbox;
+	}
+
+
+	public Button getBack_button() {
+		return back_button;
+	}
+
+
+	public void setBack_button(Button back_button) {
+		this.back_button = back_button;
 	}
 	
 	

@@ -40,6 +40,20 @@ public class User {
     	password = _password;
     }
     
+    public static void Delete(int id) {
+    	DBConnector db_connector = DBConnector.getInstance();
+    	String query = "DELETE FROM users WHERE id = ?";
+    	
+    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+    	try {
+			prepared_statement.setInt(1, id);
+			prepared_statement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     public static ArrayList<User> getAll(){
     	DBConnector db_connector = DBConnector.getInstance();
     	String query = "SELECT * FROM users";
@@ -67,6 +81,23 @@ public class User {
 		}
     	
     	return users;
+    }
+    
+    public static void UpdateUserRole(int id, String role) {
+    	DBConnector db_connector = DBConnector.getInstance();
+    	String query = "UPDATE users SET role = ? WHERE id = ?";
+    	
+    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+    	try {
+			prepared_statement.setString(1, role);
+			prepared_statement.setInt(2, id);
+			prepared_statement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
     }
     
     public static User getUser(String username, String password) {
