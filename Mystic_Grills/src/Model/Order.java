@@ -12,6 +12,42 @@ public class Order {
 	private String status;
 	private Date date;
 	
+	class Status{
+		public static final String NOT_ORDERED = "not ordered";
+		public static final String PENDING  = "pending";
+	}
+	
+	public static ArrayList<Order> getAll(){
+		DBConnector db_connector = DBConnector.getInstance();
+    	String query = "SELECT * FROM orders";
+    	ArrayList<Order> orders = new ArrayList<>();
+    	
+    	PreparedStatement prepared_statement = db_connector.PrepareStatement(query);
+    	try {
+			ResultSet result_set = prepared_statement.executeQuery();
+			while(result_set.next()) {
+				int _id = result_set.getInt("id");
+				String user_id = result_set.getString("user_id");
+				String order_item = result_set.getString("order_item_id");
+				String _status = result_set.getString("status");
+				String _date = result_set.getString("date");
+				int _total = result_set.getInt("total");
+				
+				Order order = new Order(
+						_id, user_id, order_item, _status, _date
+					);
+				
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return orders;
+		
+	}
+	
 	public Order(int user_id, int order_item_id) {
 		this.id = IDGeneratorUtil.GenerateId();
 		this.user_id =  user_id;
@@ -21,6 +57,10 @@ public class Order {
 		this.status = "Pending";
 	}
 	
+	public Order(int _id, String user_id2, String order_item, String _status, String _date) {
+		// TODO Auto-generated constructor stub
+	}
+
 	private int CalculateTotal() {
 		return 0;
 	}
